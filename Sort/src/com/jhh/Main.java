@@ -17,9 +17,13 @@ public class Main {
         Sort.print("Merge Sort Algorithm", sort.mergeSort(a, temp));
         System.out.println();
 
-
+        //先把a数组复制到array中
+        int[] array = new int[a.length];
+        System.arraycopy(a, 0, array, 0, a.length);
+        sort.quickSort(array, 0, array.length - 1);
+        Sort.print("Quick Sort Algorithm", array);
 
         System.out.println();
-        System.out.println("数组a[]: " + Arrays.toString(a));
+        System.out.println("a[]: " + Arrays.toString(a));
     }
 }

@@ -4,12 +4,14 @@ public class Sort {
 
     public Sort() {
     }
+
     //交换元素
     private void exchange(int[] a, int i, int j) {
         int temp = a[i];
         a[i] = a[j];
         a[j] = temp;
     }
+
     //打印排序后的数组
     public static void print(String sortName, int[] a) {
         System.out.print("sorted array by " + sortName + ": ");
@@ -17,6 +19,7 @@ public class Sort {
             System.out.print(i + " ");
         }
     }
+
     //选择排序
     public int[] selectSort(int[] a) {
         int[] array = new int[a.length];
@@ -33,6 +36,7 @@ public class Sort {
         }
         return array;
     }
+
     //插入排序
     public int[] insertSort(int[] a) {
         int[] array = new int[a.length];
@@ -47,6 +51,7 @@ public class Sort {
         }
         return array;
     }
+
     //归并排序
     public int[] mergeSort(int[] a, int[] temp) {
         int[] array = new int[a.length];
@@ -54,6 +59,7 @@ public class Sort {
         mergeSortUpToDown(array, 0, a.length - 1, temp);
         return array;
     }
+
     //自顶向下的归并排序
     private void mergeSortUpToDown(int[] a, int low, int high, int[] temp) {
         if (low >= high) {
@@ -64,6 +70,7 @@ public class Sort {
         mergeSortUpToDown(a, mid + 1, high, temp);
         merge(a, low, mid, high, temp);
     }
+
     //将a[low...mid]与a[mid+1...high]合并,假装两部分已经是有序的。
     private void merge(int[] a, int low, int mid, int high, int[] temp) {
         int i = low;
@@ -94,6 +101,37 @@ public class Sort {
             a[t + low] = temp[t];
         }
     }
+    //快速排序
+    public void quickSort(int[] a, int low, int high) {
+        if (low >= high) {
+            return;
+        }
+        int k = partition(a, low, high);
+        quickSort(a, low, k - 1);
+        quickSort(a, k + 1, high);
+    }
 
+    /*将数组切分成a[low...j-1],a[j],a[j+1...high]三部分，
+      a[j]大于左边数组中所有元素，小于右边数组中所有元素，
+      双指针法*/
+    private int partition(int[] a, int low, int high) {
+        int pivot = a[low]; // 此处误写成a[0], debug好久...
+        int i = low;
+        int j = high;
+        while (i < j) {
+            while (i < j && a[j] >= pivot) {
+                j--;
+            }
+            while (i < j && a[i] <= pivot) {
+                i++;
+            }
+            if (i < j) {
+                exchange(a, i, j);
+            }
+        }
+        a[low] = a[i];  // 此时i或者j位置的元素和pivot交换
+        a[i] = pivot;
 
+        return i;   //返回i或者j都可以，因为最后退出循环后i==j
+    }
 }
