@@ -66,4 +66,53 @@ public class BinarySearchTree<E extends Comparable<E>> {
             return contains(node.right, e);
         }
     }
+
+    //前序遍历
+    public void preOrder(){
+        preOrder(root);
+    }
+    private void preOrder(Node node){
+        if (node == null){
+            return;
+        }
+
+        //遍历操作
+        System.out.print(node.e + " ");
+
+        preOrder(node.left);
+        preOrder(node.right);
+    }
+
+    //中序遍历,遍历后的结果有序的
+    public void inOrder(){
+        inOrder(root);
+    }
+    // 中序遍历以node为根的二分搜索树, 递归算法
+    private void inOrder(Node node){
+        if(node == null)
+            return;
+
+        inOrder(node.left);
+
+        //遍历操作
+        System.out.print(node.e + " ");
+
+        inOrder(node.right);
+    }
+
+    //后序遍历
+    public void postOrder(){
+        postOrder(root);
+    }
+
+    //后序遍历以node为根的二分搜索树, 递归算法
+    private void postOrder(Node node){
+        if(node == null)
+            return;
+        postOrder(node.left);
+        postOrder(node.right);
+
+        //遍历操作
+        System.out.print(node.e + " ");
+    }
 }
