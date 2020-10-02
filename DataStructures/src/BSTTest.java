@@ -16,5 +16,11 @@ public class BSTTest {
 
         System.out.print("\npostOrder: ");
         bst.postOrder();
+
+        System.out.print("\npreOrderNR: ");
+        bst.preOrderNR();
+
+        System.out.print("\nlevelOrder: ");
+        bst.levelOrder();
     }
 }
