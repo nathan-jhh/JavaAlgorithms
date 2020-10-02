@@ -31,32 +31,39 @@ public class BinarySearchTree<E extends Comparable<E>> {
 
     //向二分搜索树添加新的元素
     public void add(E e) {
-        //root = add(root, e);
-        if (root == null) {
-            root = new Node(e);
-            size++;
-        } else {
-            add(root, e);
-        }
+        root = add(root, e);
     }
 
     // 向以node为根的二分搜索树中插入元素e，递归算法
     // 返回插入新节点后二分搜索树的根
-    private void add(Node node, E e) {
-        if (e.equals(node.e)) {
-            return;
-        } else if (e.compareTo(node.e) < 0 && node.left == null) {
-            node.left = new Node(e);
+    private Node add(Node node, E e) {
+        if (node == null) {
             size++;
-            return;
-        } else if (e.compareTo(node.e) > 0 && node.right == null) {
-            node.right = new Node(e);
+            return new Node(e);
         }
         if (e.compareTo(node.e) < 0) {
-            add(node.left, e);
-        } else {
-            add(node.right, e);
+            node.left = add(node.left, e);
+        } else if (e.compareTo(node.e) > 0){
+            node.right = add(node.right, e);
         }
+        return node;
+    }
 
+    //查询二分搜索树中是否包含元素e
+    public boolean contains(E e){
+        return contains(root, e);
+    }
+    //查询以node为根节点的二分搜索树中是否包含元素e
+    private boolean contains(Node node, E e){
+        if (node == null){
+            return false;
+        }
+        if (e.compareTo(node.e) == 0) {
+            return true;
+        } else if (e.compareTo(node.e) < 0) {
+            return contains(node.left, e);
+        } else {
+            return contains(node.right, e);
+        }
     }
 }
