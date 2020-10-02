@@ -155,5 +155,27 @@ public class BinarySearchTree<E extends Comparable<E>> {
         }
     }
 
+    //寻找二分搜索树中最小的元素,递归写法
+    public E min() {
+        if (size == 0) {
+            throw new IllegalArgumentException("BST is empty!");
+        }
+        return min(root).e;
+    }
 
+    //返回以node为根的二分搜索树的最小元素所在的节点
+    private Node min(Node node) {
+        if (node.left == null) {
+            return node;
+        }
+        return min(node.left);
+    }
+
+    //寻找二分搜索树中最小的元素,非递归写法，Not Recursive
+    public E minNR() {
+        while (root.left != null) {
+            root = root.left;
+        }
+        return root.e;
+    }
 }

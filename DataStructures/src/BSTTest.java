@@ -22,5 +22,8 @@ public class BSTTest {
 
         System.out.print("\nlevelOrder: ");
         bst.levelOrder();
+
+        System.out.print("\nmin: " + bst.min());
+        System.out.print("\nminNR: " + bst.minNR());
     }
 }
